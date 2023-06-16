@@ -61,5 +61,8 @@ with response_container:
         for i in range(len(st.session_state['generated'])):
             message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
             message(st.session_state["generated"][i], key=str(i))
-            
+
+sign = Login(st.secrets[“email”], st.secrets[“password”])
+cookies = sign.login()
+sign.saveCookies()            
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict()) 
